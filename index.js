@@ -1,3 +1,5 @@
+const pathfinderPkg = require("mineflayer-pathfinder");
+const { Movements, goals } = pathfinderPkg;
 const fs = require("fs");
 const mineflayer = require("mineflayer");
 let bot;
