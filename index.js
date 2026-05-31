@@ -1,24 +1,44 @@
-const pathfinderPkg = require("mineflayer-pathfinder");
-const { Movements, goals } = pathfinderPkg;
 const fs = require("fs");
 const mineflayer = require("mineflayer");
+const { pathfinder, Movements, goals } = require("mineflayer-pathfinder");
+let lobbyF = false;
 let bot;
 
+console.clear();
+console.log("6b6t bot by Carlox\nhttps://github.com/CarloxCoC/SpamBot\nv1.2\n");
+
 const config = JSON.parse(fs.readFileSync("./config.json", "utf-8"));
-process.on('warning', e => console.warn(e.stack));
 
-// Specify the file path for logging
-const logFilePath = "./bot_log.txt";
+function isInLobby() {
+  if (!bot || !bot.game || bot.game.difficulty != "hard") {
+    if (!lobbyF) leaveLobby();
+    return true;
+  } else {
+    return false;
+  }
+}
 
-// Function to log messages to a file
-const logMessageToFile = (message) => {
-  fs.appendFileSync(logFilePath, `${new Date().toLocaleString()}: ${message}\n`, "utf-8");
-};
+// leave the lobby
+async function leaveLobby() {
+  lobbyF = true;
 
-const color = {
-  "green": "\x1b[32m",
-};
+  bot.controlState.forward = true;
+  await bot.waitForTicks(40);
+  bot.controlState.forward = false;
 
+  while (bot?.game?.difficulty != "hard") {
+    bot.controlState.back = true;
+    await bot.waitForTicks(20);
+    bot.controlState.back = false;
+
+    bot.controlState.forward = true;
+    await bot.waitForTicks(30);
+    bot.controlState.forward = false;
+  }
+
+  lobbyF = false;
+}
+ Sadece bunuda yapıştır
 const main = () => {
   bot = mineflayer.createBot({
     host: "6b6t.org",
