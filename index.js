@@ -38,7 +38,6 @@ async function leaveLobby() {
 
   lobbyF = false;
 }
- Sadece bunuda yapıştır
 const main = () => {
   bot = mineflayer.createBot({
     host: "6b6t.org",
