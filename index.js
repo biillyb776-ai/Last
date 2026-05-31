@@ -21,9 +21,9 @@ const color = {
 
 const main = () => {
   bot = mineflayer.createBot({
-    host: "anarchy.6b6t.org",
-    username: config.username || "Advikbot",
-    version: "1.19.4",
+    host: "6b6t.org",
+    username: config.username || "VuadasTpaBot1",
+    version: "1.21.4",
     skipValidation: true,
   });
 
